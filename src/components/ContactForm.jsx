@@ -70,7 +70,7 @@ const ContactForm = ({ title = "Send Us a Message" }) => {
         {/* Name */}
         <div>
           <label className="block text-sm font-semibold text-dark-900 mb-2">
-            Name *
+            Name 
           </label>
           <input
             type="text"
@@ -88,7 +88,7 @@ const ContactForm = ({ title = "Send Us a Message" }) => {
         {/* Email */}
         <div>
           <label className="block text-sm font-semibold text-dark-900 mb-2">
-            Email *
+            Email 
           </label>
           <input
             type="email"
@@ -108,7 +108,7 @@ const ContactForm = ({ title = "Send Us a Message" }) => {
         {/* Phone */}
         <div>
           <label className="block text-sm font-semibold text-dark-900 mb-2">
-            Phone *
+            Phone 
           </label>
           <input
             type="tel"
@@ -142,7 +142,7 @@ const ContactForm = ({ title = "Send Us a Message" }) => {
       {/* Message */}
       <div className="mb-6">
         <label className="block text-sm font-semibold text-dark-900 mb-2">
-          Message *
+          Message 
         </label>
         <textarea
           name="message"
