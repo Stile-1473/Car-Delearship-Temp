@@ -57,15 +57,15 @@ const About = () => {
             </div>
             <div>
               <div className="text-4xl md:text-5xl font-bold mb-2">500+</div>
-              <p className="text-gray-100">Happy Customers</p>
+              <p className="text-blue-700">Happy Customers</p>
             </div>
             <div>
               <div className="text-4xl md:text-5xl font-bold mb-2">100+</div>
-              <p className="text-gray-100">Vehicles Sold</p>
+              <p className="text-red-700">Vehicles Sold</p>
             </div>
             <div>
               <div className="text-4xl md:text-5xl font-bold mb-2">50+</div>
-              <p className="text-gray-100">In Stock Now</p>
+              <p className="text-purple-700">In Stock Now</p>
             </div>
           </div>
         </div>
