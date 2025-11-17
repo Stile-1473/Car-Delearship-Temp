@@ -14,15 +14,22 @@ export const carsData = [
     color: 'Silver',
     fuelType: 'Diesel',
     transmission: 'Manual',
-    image: 'https://images.pexels.com/photos/120049/pexels-photo-120049.jpeg',
+    image: 'https://images.pexels.com/photos/17519357/pexels-photo-17519357.jpeg',
     gallery: [
-      'https://images.pexels.com/photos/120049/pexels-photo-120049.jpeg',
-      'https://cdn.dribbble.com/users/1796530/screenshots/7232812/media/b3d86898b5c0e60508e20f1f67ca7e2b.png',
-      'https://cdn.dribbble.com/users/1281293/screenshots/14128372/media/d2e4f8e5e8c9f1a2b3c4d5e6f7a8b9c0.png',
+      'https://images.pexels.com/photos/19143577/pexels-photo-19143577.jpeg',
+      'https://images.pexels.com/photos/34594185/pexels-photo-34594185.jpeg',
+      'https://images.pexels.com/photos/19143577/pexels-photo-19143577.jpeg',
     ],
     features: ['Air Conditioning', 'Power Steering', 'ABS Brakes', '4WD'],
     description: 'Reliable and robust pickup truck, perfect for work and leisure.',
   },
+
+
+
+
+
+
+
   {
     id: 2,
     make: 'Volkswagen',
@@ -33,34 +40,39 @@ export const carsData = [
     color: 'Blue',
     fuelType: 'Petrol',
     transmission: 'Automatic',
-    image: 'https://images.pexels.com/photos/810357/pexels-photo-810357.jpeg',
+    image: 'https://images.pexels.com/photos/5660783/pexels-photo-5660783.jpeg',
     gallery: [
-      'https://images.pexels.com/photos/810357/pexels-photo-810357.jpeg',
-      'https://cdn.dribbble.com/users/1281293/screenshots/6684066/media/51cecc07c0a97fcb68c3f843f25818f3.png',
-      'https://cdn.dribbble.com/users/2407618/screenshots/9521318/media/c1e2d3f4a5b6c7d8e9f0a1b2c3d4e5f6.png',
+      'https://images.pexels.com/photos/20869390/pexels-photo-20869390.jpeg',
+      'https://images.pexels.com/photos/14786434/pexels-photo-14786434.jpeg',
+      'https://images.pexels.com/photos/17110456/pexels-photo-17110456.jpeg',
     ],
     features: ['Climate Control', 'Touchscreen', 'Bluetooth', 'Rear Camera'],
     description: 'Compact and economical hatchback with modern features.',
   },
+
+
+
+
   {
     id: 3,
     make: 'Mazda',
-    model: 'CX-5',
+    model: 'MX-5',
     year: 2023,
     price: 52000,
     mileage: 8000,
     color: 'Red',
     fuelType: 'Petrol',
     transmission: 'Automatic',
-    image: 'https://images.pexels.com/photos/1335077/pexels-photo-1335077.jpeg',
+    image: 'https://images.pexels.com/photos/18864728/pexels-photo-18864728.jpeg',
     gallery: [
-      'https://images.pexels.com/photos/1335077/pexels-photo-1335077.jpeg',
-      'https://cdn.dribbble.com/users/1281293/screenshots/6684066/media/51cecc07c0a97fcb68c3f843f25818f3.png',
-      'https://cdn.dribbble.com/users/1796530/screenshots/7232812/media/b3d86898b5c0e60508e20f1f67ca7e2b.png',
+      'https://images.pexels.com/photos/18864726/pexels-photo-18864726.jpeg',
+      'https://images.pexels.com/photos/18864728/pexels-photo-18864728.jpeg',
+      'https://images.pexels.com/photos/18864726/pexels-photo-18864726.jpeg',
     ],
     features: ['AWD', 'Panoramic Sunroof', 'Navigation', 'Leather Seats'],
     description: 'Stylish crossover SUV with premium comfort and safety features.',
   },
+
   {
     id: 4,
     make: 'Hyundai',
@@ -71,15 +83,16 @@ export const carsData = [
     color: 'White',
     fuelType: 'Petrol',
     transmission: 'Manual',
-    image: 'https://images.pexels.com/photos/1213294/pexels-photo-1213294.jpeg',
+    image: 'https://images.pexels.com/photos/12995755/pexels-photo-12995755.jpeg',
     gallery: [
-      'https://images.pexels.com/photos/1213294/pexels-photo-1213294.jpeg',
-      'https://cdn.dribbble.com/users/2407618/screenshots/9521318/media/c1e2d3f4a5b6c7d8e9f0a1b2c3d4e5f6.png',
-      'https://cdn.dribbble.com/users/1796530/screenshots/7232812/media/b3d86898b5c0e60508e20f1f67ca7e2b.png',
+      'https://images.pexels.com/photos/11194510/pexels-photo-11194510.jpeg',
+      'https://images.pexels.com/photos/10012866/pexels-photo-10012866.jpeg',
+      'https://images.pexels.com/photos/17921470/pexels-photo-17921470.jpeg',
     ],
     features: ['Power Windows', 'ABS', 'Central Locking', 'Fuel Efficient'],
     description: 'Budget-friendly city car with excellent fuel efficiency.',
   },
+
   {
     id: 5,
     make: 'Ford',
@@ -90,11 +103,11 @@ export const carsData = [
     color: 'Black',
     fuelType: 'Diesel',
     transmission: 'Automatic',
-    image: 'https://images.pexels.com/photos/1134857/pexels-photo-1134857.jpeg',
+    image: 'https://images.pexels.com/photos/28728200/pexels-photo-28728200.jpeg',
     gallery: [
-      'https://images.pexels.com/photos/1134857/pexels-photo-1134857.jpeg',
-      'https://cdn.dribbble.com/users/1796530/screenshots/7232812/media/b3d86898b5c0e60508e20f1f67ca7e2b.png',
-      'https://cdn.dribbble.com/users/2407618/screenshots/9521318/media/c1e2d3f4a5b6c7d8e9f0a1b2c3d4e5f6.png',
+      'https://images.pexels.com/photos/16033915/pexels-photo-16033915.jpeg',
+      'https://images.pexels.com/photos/16033915/pexels-photo-16033915.jpeg',
+      'https://images.pexels.com/photos/28728200/pexels-photo-28728200.jpeg',
     ],
     features: ['Traction Control', 'Hill Start', 'Tow Package', 'Sport Mode'],
     description: 'Powerful pickup with excellent towing capacity and durability.',
@@ -377,21 +390,21 @@ export const promotions = [
     title: 'End of Year Clearance',
     description: 'Up to 15% discount on selected vehicles. Limited time offer!',
     discount: '15%',
-    image: 'https://cdn.dribbble.com/users/1281293/screenshots/6684066/media/51cecc07c0a97fcb68c3f843f25818f3.png',
+    image: 'https://images.pexels.com/photos/25338340/pexels-photo-25338340.jpeg',
   },
   {
     id: 2,
     title: 'Free Insurance for 6 Months',
     description: 'Get 6 months of free comprehensive insurance with any purchase.',
     discount: 'Free',
-    image: 'https://cdn.dribbble.com/users/1796530/screenshots/7232812/media/b3d86898b5c0e60508e20f1f67ca7e2b.png',
+    image: 'https://images.pexels.com/photos/3264504/pexels-photo-3264504.jpeg',
   },
   {
     id: 3,
     title: 'Low Finance Rates',
     description: 'Finance your dream car at rates as low as 8.5% per annum.',
     discount: '8.5%',
-    image: 'https://cdn.dribbble.com/users/2407618/screenshots/9521318/media/c1e2d3f4a5b6c7d8e9f0a1b2c3d4e5f6.png',
+    image: 'https://images.pexels.com/photos/2920064/pexels-photo-2920064.jpeg',
   },
 ];
 
