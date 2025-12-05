@@ -26,7 +26,7 @@ const Home = () => {
 
   return (
     <div className="w-full">
-      {/* Hero Section (Vercel-like minimal) */}
+      {/* Hero Section  */}
       <section className="bg-white">
         <div className="max-w-6xl mx-auto px-6 py-24 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
           <div>

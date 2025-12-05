@@ -409,10 +409,10 @@ export const promotions = [
 ];
 
 export const dealershipInfo = {
-  name: 'Premier Car Dealership Zimbabwe',
-  email: 'info@premiercardealer.co.zw',
-  phone: '+263 4 123 4567',
-  whatsapp: '+263 77 123 4567',
+  name: 'Zim Car Dealership Zimbabwe',
+  email: 'info@zimcardealer.co.zw',
+  phone: '+263 78 68 28855',
+  whatsapp: '+263 78 68 28855',
   address: '123 Harare Avenue, Harare, Zimbabwe',
   hours: {
     weekdays: '08:00 AM - 18:00 PM',
@@ -423,7 +423,7 @@ export const dealershipInfo = {
     lat: -17.8252,
     lng: 31.0335,
   },
-  about: 'Premier Car Dealership has been serving the Zimbabwean community for over 10 years. We offer a wide selection of quality vehicles, competitive financing options, and excellent customer service.',
+  about: 'Zim Car Dealership has been serving the Zimbabwean community for over 10 years. We offer a wide selection of quality vehicles, competitive financing options, and excellent customer service.',
   team: [
     {
       id: 1,

@@ -27,7 +27,7 @@ const About = () => {
             <div>
               <h2 className="text-2xl font-semibold text-gray-900 mb-4">Our Story</h2>
               <p className="text-gray-700 mb-4 leading-relaxed">
-                Premier Car Dealership Zimbabwe was founded with a simple mission: to provide quality vehicles and outstanding customer service to the Zimbabwean community.
+                ZimCar Car Dealership Zimbabwe was founded with a simple mission: to provide quality vehicles and outstanding customer service to the Zimbabwean community.
               </p>
               <p className="text-gray-700 mb-4 leading-relaxed">
                 With over 10 years of experience in the automotive industry, we have built a reputation for honesty, reliability, and professionalism. We carefully select every vehicle to ensure it meets our high standards.

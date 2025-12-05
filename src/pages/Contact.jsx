@@ -141,7 +141,7 @@ const Contact = () => {
         {/* Map Section */}
         <div className="bg-gray-100 rounded-lg overflow-hidden shadow-sm h-96">
           <iframe
-            title="Premier Car Dealership Location"
+            title="ZimCar Car Dealership Location"
             width="100%"
             height="100%"
             frameBorder="0"
