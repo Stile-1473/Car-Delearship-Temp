@@ -42,7 +42,7 @@ const ContactForm = ({ title = "Send Us a Message" }) => {
     const newErrors = validateForm();
 
     if (Object.keys(newErrors).length === 0) {
-      // In a real app, this would send to a backend
+      
       console.log('Form submitted:', formData);
       setSubmitted(true);
       setFormData({ name: '', email: '', phone: '', subject: '', message: '' });
