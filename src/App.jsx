@@ -4,6 +4,8 @@
  */
 
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import ScrollManager from './components/ScrollManager';
+import WhatsAppFloat from './components/WhatsAppFloat';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Home from './pages/Home';
@@ -12,11 +14,13 @@ import CarDetails from './pages/CarDetails';
 import About from './pages/About';
 import Blog from './pages/Blog';
 import Contact from './pages/Contact';
+import Showroom from './pages/Showroom';
 import './App.css';
 
 function App() {
   return (
     <Router>
+      <ScrollManager />
       <div className="flex flex-col min-h-screen bg-white">
         {/* Header Navigation */}
         <Header />
@@ -26,6 +30,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/inventory" element={<Inventory />} />
+            <Route path="/showroom" element={<Showroom />} />
             <Route path="/car/:id" element={<CarDetails />} />
             <Route path="/about" element={<About />} />
             <Route path="/blog" element={<Blog />} />
@@ -47,6 +52,7 @@ function App() {
 
         {/* Footer */}
         <Footer />
+        <WhatsAppFloat />
       </div>
     </Router>
   );

@@ -4,6 +4,9 @@
  */
 
 import React, { useState, useMemo } from 'react';
+import { useSearchParams } from 'react-router-dom';
+import { FaHeart } from 'react-icons/fa';
+import useSavedCars from '../hooks/useSavedCars';
 import SearchBar from '../components/SearchBar';
 import CarCard from '../components/CarCard';
 import { carsData } from '../data/mockData';
@@ -13,6 +16,9 @@ const Inventory = () => {
   const [filters, setFilters] = useState({ make: '', model: '', minPrice: '', maxPrice: '' });
   const [sortBy, setSortBy] = useState('featured');
   const [gridCols, setGridCols] = useState('3');
+  const [params, setParams] = useSearchParams();
+  const savedOnly = params.get('saved') === '1';
+  const { saved } = useSavedCars();
 
   // Filter and sort logic
   const filteredAndSortedCars = useMemo(() => {
@@ -21,7 +27,8 @@ const Inventory = () => {
       const matchModel = !filters.model || car.model === filters.model;
       const matchMinPrice = !filters.minPrice || car.price >= parseInt(filters.minPrice);
       const matchMaxPrice = !filters.maxPrice || car.price <= parseInt(filters.maxPrice);
-      return matchMake && matchModel && matchMinPrice && matchMaxPrice;
+      const matchSaved = !savedOnly || saved.includes(car.id);
+      return matchMake && matchModel && matchMinPrice && matchMaxPrice && matchSaved;
     });
 
     // Sort
@@ -43,7 +50,7 @@ const Inventory = () => {
     }
 
     return result;
-  }, [filters, sortBy]);
+  }, [filters, sortBy, savedOnly, saved]);
 
   return (
     <main className="min-h-screen bg-white pb-24">
@@ -75,6 +82,14 @@ const Inventory = () => {
               </select>
             </div>
 
+            <button
+              type="button"
+              onClick={() => setParams(savedOnly ? {} : { saved: '1' })}
+              className={`mb-3 md:mb-0 inline-flex items-center gap-2 rounded-md border px-3 py-1 text-sm ${savedOnly ? 'border-red-300 bg-red-50 text-red-700' : 'border-gray-200 text-gray-700 hover:bg-white'}`}
+            >
+              <FaHeart className={savedOnly ? 'text-red-500' : 'text-gray-400'} /> Saved ({saved.length})
+            </button>
+
             <div className="flex items-center space-x-2">
               <span className="text-sm text-gray-600">Grid:</span>
               <select
@@ -97,7 +112,9 @@ const Inventory = () => {
               ))}
             </div>
           ) : (
-            <div className="text-center text-gray-600 py-20 text-lg">No cars found matching your criteria.</div>
+            <div className="text-center text-gray-600 py-20 text-lg">
+              {savedOnly ? 'No saved cars yet. Tap the heart on any car to shortlist it.' : 'No cars found matching your criteria.'}
+            </div>
           )}
         </div>
       </section>

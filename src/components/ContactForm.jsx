@@ -6,13 +6,13 @@
 import React, { useState } from 'react';
 import { FaPaperPlane } from 'react-icons/fa';
 
-const ContactForm = ({ title = "Send Us a Message" }) => {
+const ContactForm = ({ title = "Send Us a Message", initialSubject = '', initialMessage = '' }) => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     phone: '',
-    subject: '',
-    message: '',
+    subject: initialSubject,
+    message: initialMessage,
   });
 
   const [submitted, setSubmitted] = useState(false);
