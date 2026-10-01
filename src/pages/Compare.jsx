@@ -13,6 +13,7 @@ import SaveButton from '../components/SaveButton';
 import { carsData } from '../data/mockData';
 import { fromMonthly, usd } from '../utils/finance';
 import { whatsappLink, carTitle } from '../utils/whatsapp';
+import { fallbackTo } from '../utils/imageFallback';
 
 const Compare3D = lazy(() => import('../components/three/Compare3D'));
 
@@ -166,10 +167,7 @@ const Compare = () => {
                             src={c.image}
                             alt={carTitle(c)}
                             className="h-32 w-full rounded-lg object-cover"
-                            onError={(e) => {
-                              e.target.onerror = null;
-                              e.target.src = photoFallback;
-                            }}
+                            onError={fallbackTo(photoFallback)}
                           />
                           <button
                             type="button"

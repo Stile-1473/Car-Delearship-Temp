@@ -9,6 +9,7 @@ import { FaChevronRight, FaArrowRight } from 'react-icons/fa';
 import CarCard from '../components/CarCard';
 import TestimonialsSlider from '../components/TestimonialsSlider';
 import { carsData, testimonials, promotions } from '../data/mockData';
+import { fallbackTo } from '../utils/imageFallback';
 
 const HeroCar3D = lazy(() => import('../components/three/HeroCar3D'));
 const heroCar = carsData.find(c => c.bodyType === 'roadster') || carsData[0];
@@ -122,7 +123,7 @@ const Home = () => {
                     src={promo.image}
                     alt={promo.title}
                     className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
-                    onError={e => { e.target.onerror = null; e.target.src = 'https://images.unsplash.com/photo-1552820728-8ac41f1ce891?w=500&h=300&fit=crop'; }}
+                    onError={fallbackTo('https://images.unsplash.com/photo-1552820728-8ac41f1ce891?w=500&h=300&fit=crop')}
                   />
                 </div>
                 <div className="p-4">

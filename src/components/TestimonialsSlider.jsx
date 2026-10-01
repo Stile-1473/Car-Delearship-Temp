@@ -5,6 +5,7 @@
 
 import React, { useState } from 'react';
 import { FaChevronLeft, FaChevronRight, FaStar } from 'react-icons/fa';
+import { fallbackTo } from '../utils/imageFallback';
 
 const avatarFallback = 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=200&h=200&fit=crop&auto=format';
 
@@ -38,7 +39,7 @@ const TestimonialsSlider = ({ testimonials }) => {
               <img
                 src={testimonial.image || avatarFallback}
                 alt={testimonial.name}
-                onError={(e) => { e.target.onerror = null; e.target.src = avatarFallback; }}
+                onError={fallbackTo(avatarFallback)}
                 className="w-20 h-20 rounded-full object-cover"
               />
             </div>

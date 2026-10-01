@@ -8,7 +8,7 @@ import React, { Suspense, useEffect, useMemo, useRef, useState } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { CameraControls, ContactShadows, Html } from '@react-three/drei';
 import { FaSyncAlt, FaLightbulb } from 'react-icons/fa';
-import ProceduralCar from './ProceduralCar';
+import CarModel from './CarModel';
 import { MoodLighting } from './StudioEnvironment';
 import { resolveSpec } from './carSpecs';
 import { paintForColor, finishForColor } from './paints';
@@ -77,8 +77,8 @@ export default function Compare3D({ cars }) {
           {cars.map((car, i) => (
             <group key={car.id} position={[xs[i], 0, 0]}>
               <Spinning spin={spin}>
-                <ProceduralCar
-                  bodyType={car.bodyType}
+                <CarModel
+                  car={car}
                   paint={paintForColor(car.color)}
                   finish={finishForColor(car.color)}
                   lightsOn={lights}

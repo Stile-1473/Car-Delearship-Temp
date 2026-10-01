@@ -10,7 +10,7 @@ import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { CameraControls, Environment, Lightformer, MeshReflectorMaterial, Html, ContactShadows } from '@react-three/drei';
 import * as THREE from 'three';
 import { FaChevronLeft, FaChevronRight, FaCube, FaPaperPlane, FaTachometerAlt, FaGasPump, FaCogs } from 'react-icons/fa';
-import ProceduralCar from './ProceduralCar';
+import CarModel from './CarModel';
 import { textTexture } from './carGeometry';
 import { paintForColor, finishForColor } from './paints';
 import Glow from './Glow';
@@ -48,8 +48,8 @@ function Turntable({ car, x, selected, onSelect, portal }) {
         <meshStandardMaterial color="#f59e0b" emissive="#f59e0b" emissiveIntensity={selected ? 2.2 : 0.5} toneMapped={false} />
       </mesh>
       <group ref={spin} onClick={(e) => { e.stopPropagation(); onSelect(); }}>
-        <ProceduralCar
-          bodyType={car.bodyType}
+        <CarModel
+          car={car}
           paint={paintForColor(car.color)}
           finish={finishForColor(car.color)}
           lightsOn={selected}
