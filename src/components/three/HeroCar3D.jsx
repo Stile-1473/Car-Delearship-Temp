@@ -6,7 +6,7 @@
 import React, { Suspense, useRef } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { PresentationControls } from '@react-three/drei';
-import ProceduralCar from './ProceduralCar';
+import CarModel from './CarModel';
 import { MoodLighting, StudioFloor } from './StudioEnvironment';
 import { paintForColor } from './paints';
 import Glow from './Glow';
@@ -30,8 +30,8 @@ export default function HeroCar3D({ car }) {
           <StudioFloor mood="studio" radius={3} />
           <PresentationControls global={false} snap polar={[0, 0]} azimuth={[-Infinity, Infinity]} speed={1.5}>
             <Spinner>
-              <ProceduralCar
-                bodyType={car.bodyType}
+              <CarModel
+                car={car}
                 paint={paintForColor(car.color)}
                 finish="gloss"
                 lightsOn

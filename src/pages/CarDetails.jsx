@@ -22,9 +22,11 @@ import ContactForm from '../components/ContactForm';
 import FinanceCalculator from '../components/FinanceCalculator';
 import TestDriveBooking from '../components/TestDriveBooking';
 import SaveButton from '../components/SaveButton';
+import CompareButton from '../components/CompareButton';
 import { carsData } from '../data/mockData';
 import { fromMonthly, usd } from '../utils/finance';
 import { whatsappLink, carTitle, carUrl } from '../utils/whatsapp';
+import { fallbackTo } from '../utils/imageFallback';
 
 // three.js is heavy, so it is only downloaded when a car page is opened
 const CarViewer = lazy(() => import('../components/three/CarViewer'));
@@ -140,6 +142,7 @@ const CarDetails = () => {
                   <FaCalendarAlt /> Book test drive
                 </button>
                 <SaveButton carId={car.id} withLabel className="rounded-lg border border-gray-300 px-4 py-2.5 font-medium text-gray-800 hover:bg-gray-50" />
+                <CompareButton carId={car.id} withLabel className="rounded-lg border border-gray-300 px-4 py-2.5 font-medium text-gray-800 hover:bg-gray-50" />
                 <button
                   type="button"
                   onClick={share}
@@ -170,7 +173,7 @@ const CarDetails = () => {
                       alt={`${title} photo ${idx + 1}`}
                       loading="lazy"
                       className="h-36 w-full rounded-lg border border-gray-100 object-cover"
-                      onError={e => { e.target.onerror = null; e.target.src = photoFallback; }}
+                      onError={fallbackTo(photoFallback)}
                     />
                   ))}
                 </div>

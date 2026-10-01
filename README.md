@@ -30,11 +30,53 @@ React + Vite + Tailwind dealership site with a real-time 3D showroom built on
   enquiry links. The number comes from `dealershipInfo.whatsapp` in `src/data/mockData.js`.
 - **Saved cars**: heart any car; the header shows the count and Inventory has a Saved filter.
   Stored in the visitor's browser.
+- **Compare cars** (`/compare`): pick up to 3 from any card, car page or the showroom; a tray
+  tracks the picks. Shows the cars side by side in 3D, key numbers with the best value
+  highlighted, and a feature checklist. The selection is in the URL so it can be shared.
 - **Share** button (native share sheet or copy link) and a sticky price / test-drive bar on mobile.
 
 There is no backend yet: bookings and finance applications are delivered through WhatsApp.
 
-## How the 3D cars work
+## Adding real 3D car models (free)
+
+Any car can show a real model instead of the built-in one. Cars without a model keep
+the built-in shape, and if a model file is missing or broken the built-in car is shown,
+so the page never breaks.
+
+1. **Find a model.** On [Sketchfab](https://sketchfab.com) search for the car (e.g.
+   "Toyota Hilux"), tick **Downloadable**, and check the licence:
+   - ✅ **CC BY** / **CC0**: fine for a business site (CC BY needs a credit, see step 5).
+   - ❌ **CC BY-NC** (non-commercial) or **Editorial**: not allowed on a dealership site.
+2. **Download** it as **glTF / GLB** (Sketchfab's "Autoconverted format (glb)").
+3. **Shrink it** (aim for under ~10 MB so it loads fast on phones):
+   ```bash
+   npx @gltf-transform/cli optimize hilux-original.glb hilux.glb --compress draco --texture-compress webp
+   ```
+   Or drag it into [gltf.report](https://gltf.report) and export compressed.
+4. **Add the file** to `public/models/`, e.g. `public/models/hilux.glb`.
+5. **Point the car at it** in `src/data/mockData.js`:
+   ```js
+   {
+     id: 1,
+     make: 'Toyota',
+     model: 'Hilux',
+     model3d: '/models/hilux.glb',
+     modelCredit: { author: 'Artist name', url: 'https://sketchfab.com/3d-models/...', license: 'CC BY 4.0' },
+     // Optional fixes, only if needed:
+     // modelRotation: 180,            // degrees, if the car faces backwards
+     // paintMaterials: ['Body_Paint'], // material names, if colour changes don't apply
+     // modelLength: 5.3,              // metres, defaults to the body type's length
+     ...
+   }
+   ```
+
+The model is automatically scaled to a real length, turned to face forward and set on
+the floor. Paint colours work when the model has a paint/body material, and headlights
+glow when its light materials are named like "headlight". Opening doors, wheel styles and
+interior trim are only available on the built-in cars. The interior view works if the
+model includes a cabin.
+
+## How the built-in 3D cars work
 
 The cars are generated in code from a body profile (`src/components/three/carSpecs.js`),
 so no model files need to be downloaded or licensed. Each car's `bodyType` in
@@ -51,6 +93,7 @@ on pages that use it.
 | `components/three/Showroom3D.jsx` | Virtual showroom |
 | `components/three/moods.js`, `StudioEnvironment.jsx` | Lighting moods, floor, shadows |
 | `components/three/Glow.jsx` | Bloom + tone mapping post-processing |
+| `components/three/CarModel.jsx`, `GLBCar.jsx` | Real `.glb` models: loading, sizing, repainting, fallback |
 
 ## Scripts
 

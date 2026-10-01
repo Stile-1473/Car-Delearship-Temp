@@ -6,6 +6,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import ScrollManager from './components/ScrollManager';
 import WhatsAppFloat from './components/WhatsAppFloat';
+import CompareTray from './components/CompareTray';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Home from './pages/Home';
@@ -15,6 +16,7 @@ import About from './pages/About';
 import Blog from './pages/Blog';
 import Contact from './pages/Contact';
 import Showroom from './pages/Showroom';
+import Compare from './pages/Compare';
 import './App.css';
 
 function App() {
@@ -31,6 +33,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/inventory" element={<Inventory />} />
             <Route path="/showroom" element={<Showroom />} />
+            <Route path="/compare" element={<Compare />} />
             <Route path="/car/:id" element={<CarDetails />} />
             <Route path="/about" element={<About />} />
             <Route path="/blog" element={<Blog />} />
@@ -52,6 +55,7 @@ function App() {
 
         {/* Footer */}
         <Footer />
+        <CompareTray />
         <WhatsAppFloat />
       </div>
     </Router>

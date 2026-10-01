@@ -10,12 +10,13 @@ import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { CameraControls, Environment, Lightformer, MeshReflectorMaterial, Html, ContactShadows } from '@react-three/drei';
 import * as THREE from 'three';
 import { FaChevronLeft, FaChevronRight, FaCube, FaPaperPlane, FaTachometerAlt, FaGasPump, FaCogs } from 'react-icons/fa';
-import ProceduralCar from './ProceduralCar';
+import CarModel from './CarModel';
 import { textTexture } from './carGeometry';
 import { paintForColor, finishForColor } from './paints';
 import Glow from './Glow';
 import useLowPower from './useLowPower';
 import SaveButton from '../SaveButton';
+import CompareButton from '../CompareButton';
 
 const SPACING = 7.5;
 const RENDER_RANGE = 3; // only draw cars near the one in focus
@@ -47,8 +48,8 @@ function Turntable({ car, x, selected, onSelect, portal }) {
         <meshStandardMaterial color="#f59e0b" emissive="#f59e0b" emissiveIntensity={selected ? 2.2 : 0.5} toneMapped={false} />
       </mesh>
       <group ref={spin} onClick={(e) => { e.stopPropagation(); onSelect(); }}>
-        <ProceduralCar
-          bodyType={car.bodyType}
+        <CarModel
+          car={car}
           paint={paintForColor(car.color)}
           finish={finishForColor(car.color)}
           lightsOn={selected}
@@ -287,6 +288,7 @@ export default function Showroom3D({ cars }) {
               <FaCube /> Explore inside & out
             </Link>
             <SaveButton carId={car.id} className="rounded-lg border border-white/20 px-3 hover:bg-white/10" />
+            <CompareButton carId={car.id} className="rounded-lg border border-white/20 px-3 hover:bg-white/10" />
             <Link
               to={`/car/${car.id}#enquire`}
               className="inline-flex items-center justify-center gap-2 rounded-lg border border-white/20 px-4 py-2.5 text-sm font-medium hover:bg-white/10"

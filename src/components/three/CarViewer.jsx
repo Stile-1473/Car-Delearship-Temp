@@ -19,7 +19,7 @@ import {
   FaInfoCircle,
   FaPaperPlane,
 } from 'react-icons/fa';
-import ProceduralCar from './ProceduralCar';
+import CarModel from './CarModel';
 import { MoodLighting, StudioFloor } from './StudioEnvironment';
 import { MOODS } from './moods';
 import { cameraViews, carAnchors } from './carSpecs';
@@ -227,6 +227,11 @@ export default function CarViewer({ car, onEnquire, className = '' }) {
   const [fullscreen, setFullscreen] = useState(false);
   const [webgl] = useState(hasWebGL);
   const lowPower = useLowPower();
+  // real models (car.model3d) support paint + lights; doors, rims and trim are procedural-only
+  const [modelInfo, setModelInfo] = useState({ loaded: false, paintable: true });
+  // only once the file has actually loaded; a missing/broken file falls back to the full procedural car
+  const isReal = Boolean(car.model3d) && modelInfo.loaded;
+  const tabs = isReal ? TABS.filter((t) => t === 'Paint' || t === 'Scene') : TABS;
 
   const containerRef = useRef();
   // Html labels mount here so they don't depend on the canvas event wiring order
@@ -281,8 +286,8 @@ export default function CarViewer({ car, onEnquire, className = '' }) {
       title,
       paint: paintName,
       finish: options[0]?.name,
-      rims: options[1]?.name,
-      interior: options[2]?.name,
+      rims: isReal ? 'As shown' : options[1]?.name,
+      interior: isReal ? 'As shown' : options[2]?.name,
       total,
     });
   };
@@ -312,8 +317,8 @@ export default function CarViewer({ car, onEnquire, className = '' }) {
         <Suspense fallback={<Loader />}>
           <MoodLighting mood={mood} />
           <StudioFloor mood={mood} radius={radius} />
-          <ProceduralCar
-            bodyType={bodyType}
+          <CarModel
+            car={car}
             paint={paint}
             finish={finish}
             rims={rims}
@@ -322,6 +327,7 @@ export default function CarViewer({ car, onEnquire, className = '' }) {
             lightsOn={lightsOn}
             title={title}
             onDoorClick={() => setDoorsOpen((d) => !d)}
+            onInfo={setModelInfo}
           />
           {showHotspots &&
             hotspots
@@ -342,8 +348,21 @@ export default function CarViewer({ car, onEnquire, className = '' }) {
         </span>
         <h2 className="mt-2 text-xl font-bold leading-tight drop-shadow sm:text-3xl">{title}</h2>
         <p className="mt-1 hidden text-xs text-white/60 sm:block">
-          Drag to rotate · Scroll to zoom · Click a door to open it
+          Drag to rotate · Scroll to zoom{isReal ? '' : ' · Click a door to open it'}
         </p>
+        {car.modelCredit && (
+          <p className="pointer-events-auto mt-1 text-[11px] text-white/45">
+            3D model:{' '}
+            {car.modelCredit.url ? (
+              <a href={car.modelCredit.url} target="_blank" rel="noreferrer" className="underline hover:text-white">
+                {car.modelCredit.author}
+              </a>
+            ) : (
+              car.modelCredit.author
+            )}
+            {car.modelCredit.license ? ` · ${car.modelCredit.license}` : ''}
+          </p>
+        )}
       </div>
 
       {/* Quick actions */}
@@ -351,9 +370,11 @@ export default function CarViewer({ car, onEnquire, className = '' }) {
         <IconButton active={autoRotate} onClick={() => setAutoRotate((v) => !v)} label="Turntable spin">
           <FaSyncAlt />
         </IconButton>
-        <IconButton active={doorsOpen} onClick={() => setDoorsOpen((v) => !v)} label="Open / close doors">
-          <FaDoorOpen />
-        </IconButton>
+        {!isReal && (
+          <IconButton active={doorsOpen} onClick={() => setDoorsOpen((v) => !v)} label="Open / close doors">
+            <FaDoorOpen />
+          </IconButton>
+        )}
         <IconButton active={lightsOn} onClick={() => setLightsOn((v) => !v)} label="Headlights">
           <FaLightbulb />
         </IconButton>
@@ -395,7 +416,7 @@ export default function CarViewer({ car, onEnquire, className = '' }) {
         <div className="flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
           <div className="min-w-0 flex-1">
             <div className="mb-2 flex gap-4 text-sm">
-              {TABS.map((t) => (
+              {tabs.map((t) => (
                 <button
                   key={t}
                   type="button"
@@ -408,7 +429,10 @@ export default function CarViewer({ car, onEnquire, className = '' }) {
             </div>
 
             <div className="flex min-h-[64px] items-center gap-3 overflow-x-auto pb-1">
-              {tab === 'Paint' && (
+              {tab === 'Paint' && !modelInfo.paintable && (
+                <p className="text-sm text-white/60">This 3D model comes in its original colour.</p>
+              )}
+              {tab === 'Paint' && modelInfo.paintable && (
                 <>
                   {PAINTS.map((p) => (
                     <button
@@ -464,7 +488,8 @@ export default function CarViewer({ car, onEnquire, className = '' }) {
                 ))}
             </div>
             <p className="mt-1 truncate text-xs text-white/50">
-              {paintName} · {options[0]?.name} · {options[1]?.name} wheels · {options[2]?.name} interior
+              {paintName} · {options[0]?.name}
+              {isReal ? '' : ` · ${options[1]?.name} wheels · ${options[2]?.name} interior`}
             </p>
           </div>
 
