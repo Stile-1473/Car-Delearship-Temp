@@ -16,6 +16,7 @@ import { paintForColor, finishForColor } from './paints';
 import Glow from './Glow';
 import useLowPower from './useLowPower';
 import SaveButton from '../SaveButton';
+import CompareButton from '../CompareButton';
 
 const SPACING = 7.5;
 const RENDER_RANGE = 3; // only draw cars near the one in focus
@@ -287,6 +288,7 @@ export default function Showroom3D({ cars }) {
               <FaCube /> Explore inside & out
             </Link>
             <SaveButton carId={car.id} className="rounded-lg border border-white/20 px-3 hover:bg-white/10" />
+            <CompareButton carId={car.id} className="rounded-lg border border-white/20 px-3 hover:bg-white/10" />
             <Link
               to={`/car/${car.id}#enquire`}
               className="inline-flex items-center justify-center gap-2 rounded-lg border border-white/20 px-4 py-2.5 text-sm font-medium hover:bg-white/10"

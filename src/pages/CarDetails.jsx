@@ -22,6 +22,7 @@ import ContactForm from '../components/ContactForm';
 import FinanceCalculator from '../components/FinanceCalculator';
 import TestDriveBooking from '../components/TestDriveBooking';
 import SaveButton from '../components/SaveButton';
+import CompareButton from '../components/CompareButton';
 import { carsData } from '../data/mockData';
 import { fromMonthly, usd } from '../utils/finance';
 import { whatsappLink, carTitle, carUrl } from '../utils/whatsapp';
@@ -140,6 +141,7 @@ const CarDetails = () => {
                   <FaCalendarAlt /> Book test drive
                 </button>
                 <SaveButton carId={car.id} withLabel className="rounded-lg border border-gray-300 px-4 py-2.5 font-medium text-gray-800 hover:bg-gray-50" />
+                <CompareButton carId={car.id} withLabel className="rounded-lg border border-gray-300 px-4 py-2.5 font-medium text-gray-800 hover:bg-gray-50" />
                 <button
                   type="button"
                   onClick={share}

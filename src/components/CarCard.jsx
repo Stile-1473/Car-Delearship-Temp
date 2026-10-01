@@ -8,6 +8,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FaGasPump, FaTachometerAlt, FaCube } from 'react-icons/fa';
 import SaveButton from './SaveButton';
+import CompareButton from './CompareButton';
 import { fromMonthly, usd } from '../utils/finance';
 
 const genericFallback =
@@ -66,9 +67,13 @@ const CarCard = ({ car, featured = false }) => {
             {car.price ? <div className="text-xs text-gray-500">from {usd(fromMonthly(car.price))}/mo</div> : null}
           </div>
 
+          <CompareButton
+            carId={car.id}
+            className="ml-auto h-9 w-9 rounded-md border border-gray-200 text-gray-600 hover:bg-gray-50"
+          />
           <Link
             to={`/car/${car.id}`}
-            className="ml-4 inline-flex items-center px-4 py-2 bg-black text-white rounded-md text-sm font-medium hover:opacity-90"
+            className="ml-2 inline-flex items-center px-4 py-2 bg-black text-white rounded-md text-sm font-medium hover:opacity-90"
           >
             View
           </Link>

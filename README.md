@@ -30,6 +30,9 @@ React + Vite + Tailwind dealership site with a real-time 3D showroom built on
   enquiry links. The number comes from `dealershipInfo.whatsapp` in `src/data/mockData.js`.
 - **Saved cars**: heart any car; the header shows the count and Inventory has a Saved filter.
   Stored in the visitor's browser.
+- **Compare cars** (`/compare`): pick up to 3 from any card, car page or the showroom; a tray
+  tracks the picks. Shows the cars side by side in 3D, key numbers with the best value
+  highlighted, and a feature checklist. The selection is in the URL so it can be shared.
 - **Share** button (native share sheet or copy link) and a sticky price / test-drive bar on mobile.
 
 There is no backend yet: bookings and finance applications are delivered through WhatsApp.
