@@ -6,7 +6,9 @@
 
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { FaGasPump, FaDollarSign, FaTachometerAlt } from 'react-icons/fa';
+import { FaGasPump, FaTachometerAlt, FaCube } from 'react-icons/fa';
+import SaveButton from './SaveButton';
+import { fromMonthly, usd } from '../utils/finance';
 
 const genericFallback =
   'https://images.unsplash.com/photo-1503736334956-4c8f8e92946d?w=500&h=400&fit=crop'; // A generic car illustration
@@ -26,6 +28,13 @@ const CarCard = ({ car, featured = false }) => {
           loading="lazy"
           onError={() => setImgSrc(genericFallback)}
         />
+        <SaveButton
+          carId={car.id}
+          className="absolute top-3 left-3 h-9 w-9 rounded-full bg-white/90 text-gray-700 shadow hover:bg-white"
+        />
+        <span className="absolute bottom-3 left-3 inline-flex items-center gap-1 rounded-full bg-black/70 px-2 py-0.5 text-[11px] font-medium text-white">
+          <FaCube className="text-amber-400" /> 3D + interior
+        </span>
         {car.year && (
           <div className="absolute top-3 right-3 bg-gray-900 text-white px-3 py-1 rounded-full text-xs font-medium">
             {car.year}
@@ -53,7 +62,8 @@ const CarCard = ({ car, featured = false }) => {
         <div className="flex items-center justify-between">
           <div>
             <div className="text-xs text-gray-500">Price</div>
-            <div className="text-lg font-bold text-gray-900">{car.price ? car.price.toLocaleString() : 'Contact'}</div>
+            <div className="text-lg font-bold text-gray-900">{car.price ? usd(car.price) : 'Contact'}</div>
+            {car.price ? <div className="text-xs text-gray-500">from {usd(fromMonthly(car.price))}/mo</div> : null}
           </div>
 
           <Link

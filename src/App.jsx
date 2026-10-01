@@ -4,6 +4,8 @@
  */
 
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import ScrollManager from './components/ScrollManager';
+import WhatsAppFloat from './components/WhatsAppFloat';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Home from './pages/Home';
@@ -18,6 +20,7 @@ import './App.css';
 function App() {
   return (
     <Router>
+      <ScrollManager />
       <div className="flex flex-col min-h-screen bg-white">
         {/* Header Navigation */}
         <Header />
@@ -49,6 +52,7 @@ function App() {
 
         {/* Footer */}
         <Footer />
+        <WhatsAppFloat />
       </div>
     </Router>
   );

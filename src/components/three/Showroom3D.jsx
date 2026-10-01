@@ -13,6 +13,9 @@ import { FaChevronLeft, FaChevronRight, FaCube, FaPaperPlane, FaTachometerAlt, F
 import ProceduralCar from './ProceduralCar';
 import { textTexture } from './carGeometry';
 import { paintForColor, finishForColor } from './paints';
+import Glow from './Glow';
+import useLowPower from './useLowPower';
+import SaveButton from '../SaveButton';
 
 const SPACING = 7.5;
 const RENDER_RANGE = 3; // only draw cars near the one in focus
@@ -168,7 +171,7 @@ export default function Showroom3D({ cars }) {
   const [index, setIndex] = useState(0);
   const controlsRef = useRef();
   const labelsRef = useRef();
-  const mobile = useMemo(() => typeof window !== 'undefined' && window.matchMedia('(max-width: 768px)').matches, []);
+  const mobile = useLowPower();
 
   const list = useMemo(() => cars.filter((c) => filter === 'all' || c.bodyType === filter), [cars, filter]);
   const safeIndex = Math.min(index, Math.max(list.length - 1, 0));
@@ -206,6 +209,7 @@ export default function Showroom3D({ cars }) {
             ) : null
           )}
           <SpotOnCar x={safeIndex * SPACING} />
+          {!mobile && <Glow intensity={0.6} />}
         </Suspense>
         <CameraRig x={safeIndex * SPACING} controlsRef={controlsRef} />
       </Canvas>
@@ -282,6 +286,7 @@ export default function Showroom3D({ cars }) {
             >
               <FaCube /> Explore inside & out
             </Link>
+            <SaveButton carId={car.id} className="rounded-lg border border-white/20 px-3 hover:bg-white/10" />
             <Link
               to={`/car/${car.id}#enquire`}
               className="inline-flex items-center justify-center gap-2 rounded-lg border border-white/20 px-4 py-2.5 text-sm font-medium hover:bg-white/10"
@@ -292,7 +297,7 @@ export default function Showroom3D({ cars }) {
         </div>
       )}
 
-      <p className="pointer-events-none absolute bottom-6 right-6 hidden text-xs text-white/40 md:block">
+      <p className="pointer-events-none absolute bottom-8 right-24 hidden text-xs text-white/40 md:block">
         ← → to browse · drag to look around · click a car to focus
       </p>
     </div>

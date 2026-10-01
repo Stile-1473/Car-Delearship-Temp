@@ -9,6 +9,8 @@ import { PresentationControls } from '@react-three/drei';
 import ProceduralCar from './ProceduralCar';
 import { MoodLighting, StudioFloor } from './StudioEnvironment';
 import { paintForColor } from './paints';
+import Glow from './Glow';
+import useLowPower from './useLowPower';
 
 function Spinner({ children }) {
   const ref = useRef();
@@ -19,6 +21,7 @@ function Spinner({ children }) {
 }
 
 export default function HeroCar3D({ car }) {
+  const lowPower = useLowPower();
   return (
     <Canvas dpr={[1, 2]} camera={{ position: [4.8, 1.7, 5.4], fov: 36 }}>
       <Suspense fallback={null}>
@@ -38,6 +41,7 @@ export default function HeroCar3D({ car }) {
             </Spinner>
           </PresentationControls>
         </group>
+        {!lowPower && <Glow intensity={0.9} />}
       </Suspense>
     </Canvas>
   );

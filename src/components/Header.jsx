@@ -6,7 +6,8 @@
 
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { FaBars, FaTimes, FaCarSide } from 'react-icons/fa';
+import { FaBars, FaTimes, FaCarSide, FaHeart } from 'react-icons/fa';
+import useSavedCars from '../hooks/useSavedCars';
 
 const navLinks = [
   { name: 'Home', path: '/' },
@@ -20,6 +21,7 @@ const navLinks = [
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const location = useLocation();
+  const { saved } = useSavedCars();
 
   return (
     <header className="bg-white border-b sticky top-0 z-50">
@@ -46,6 +48,14 @@ const Header = () => {
 
         {/* Mobile Menu Button */}
         <div className="flex items-center space-x-4">
+          <Link to="/inventory?saved=1" className="relative text-gray-700 hover:text-black" aria-label={`Saved cars (${saved.length})`}>
+            <FaHeart className={`text-xl ${saved.length ? 'text-red-500' : ''}`} />
+            {saved.length > 0 && (
+              <span className="absolute -right-2 -top-2 flex h-4 min-w-4 items-center justify-center rounded-full bg-gray-900 px-1 text-[10px] font-bold text-white">
+                {saved.length}
+              </span>
+            )}
+          </Link>
           <Link to="/contact" className="hidden md:inline-block text-sm font-medium text-black border px-3 py-1 rounded">Contact</Link>
           <button
             className="md:hidden text-2xl text-gray-700"

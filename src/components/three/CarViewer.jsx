@@ -23,6 +23,8 @@ import ProceduralCar from './ProceduralCar';
 import { MoodLighting, StudioFloor } from './StudioEnvironment';
 import { MOODS } from './moods';
 import { cameraViews, carAnchors } from './carSpecs';
+import Glow from './Glow';
+import useLowPower from './useLowPower';
 import { PAINTS, FINISHES, RIMS, INTERIORS, paintForColor, finishForColor } from './paints';
 
 const VIEWS = [
@@ -163,13 +165,11 @@ function Rig({ view, viewNonce, views, autoRotate, controlsRef }) {
 
 /** Exposes a snapshot function that renders the current frame to a PNG. */
 function SnapshotBridge({ onReady }) {
-  const { gl, scene, camera } = useThree();
+  const gl = useThree((st) => st.gl);
   useEffect(() => {
-    onReady(() => {
-      gl.render(scene, camera);
-      return gl.domElement.toDataURL('image/png');
-    });
-  }, [gl, scene, camera, onReady]);
+    // preserveDrawingBuffer keeps the last composed frame (with bloom) readable
+    onReady(() => gl.domElement.toDataURL('image/png'));
+  }, [gl, onReady]);
   return null;
 }
 
@@ -226,6 +226,7 @@ export default function CarViewer({ car, onEnquire, className = '' }) {
   const [tab, setTab] = useState('Paint');
   const [fullscreen, setFullscreen] = useState(false);
   const [webgl] = useState(hasWebGL);
+  const lowPower = useLowPower();
 
   const containerRef = useRef();
   // Html labels mount here so they don't depend on the canvas event wiring order
@@ -305,7 +306,7 @@ export default function CarViewer({ car, onEnquire, className = '' }) {
       <Canvas
         dpr={[1, 2]}
         camera={{ position: views.exterior.pos, fov: 38, near: 0.01, far: 200 }}
-        gl={{ antialias: true }}
+        gl={{ antialias: true, preserveDrawingBuffer: true }}
         onPointerMissed={() => (document.body.style.cursor = '')}
       >
         <Suspense fallback={<Loader />}>
@@ -326,6 +327,7 @@ export default function CarViewer({ car, onEnquire, className = '' }) {
             hotspots
               .filter((h) => (view === 'interior' ? h.interior : !h.interior || doorsOpen))
               .map((h) => <Hotspot key={h.label} {...h} index={hotspots.indexOf(h)} portal={labelsRef} />)}
+          {!lowPower && <Glow intensity={mood === 'night' ? 1.2 : 0.7} />}
         </Suspense>
         <Rig view={view} viewNonce={viewNonce} views={views} autoRotate={autoRotate} controlsRef={controlsRef} />
         <FovTween interior={view === 'interior'} />
