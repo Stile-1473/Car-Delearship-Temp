@@ -10,6 +10,7 @@ import { FaBars, FaTimes, FaCarSide } from 'react-icons/fa';
 
 const navLinks = [
   { name: 'Home', path: '/' },
+  { name: 'Showroom', path: '/showroom', badge: '3D' },
   { name: 'Inventory', path: '/inventory' },
   { name: 'About', path: '/about' },
   { name: 'Blog', path: '/blog' },
@@ -38,6 +39,7 @@ const Header = () => {
               className={`text-sm font-medium text-gray-700 hover:text-black px-3 py-2 ${location.pathname === link.path ? 'text-black' : ''}`}
             >
               {link.name}
+              {link.badge && <span className="ml-1.5 rounded bg-amber-500 px-1.5 py-0.5 text-[10px] font-bold text-black">{link.badge}</span>}
             </Link>
           ))}
         </div>
@@ -66,6 +68,7 @@ const Header = () => {
               className="block px-6 py-2 text-gray-700 hover:bg-gray-50"
             >
               {link.name}
+              {link.badge && <span className="ml-1.5 rounded bg-amber-500 px-1.5 py-0.5 text-[10px] font-bold text-black">{link.badge}</span>}
             </Link>
           ))}
           <Link to="/contact" className="block mt-2 mx-6 px-4 py-2 text-center bg-black text-white rounded">Contact</Link>

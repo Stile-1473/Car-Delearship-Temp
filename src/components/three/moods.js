@@ -1,0 +1,65 @@
+/** Lighting moods shared by the 3D scenes. */
+
+export const MOODS = {
+  studio: {
+    label: 'Studio',
+    bg: '#0c0e12',
+    floor: '#15171c',
+    ambient: 0.35,
+    envIntensity: 1,
+    key: '#ffffff',
+    forms: [
+      { color: '#ffffff', intensity: 2.2, position: [0, 6, 0], rotation: [Math.PI / 2, 0, 0], scale: [12, 4, 1] },
+      { color: '#ffffff', intensity: 1.6, position: [-6, 2, 0], rotation: [0, Math.PI / 2, 0], scale: [10, 1.2, 1] },
+      { color: '#ffffff', intensity: 1.6, position: [6, 2, 0], rotation: [0, -Math.PI / 2, 0], scale: [10, 1.2, 1] },
+      { color: '#cfe3ff', intensity: 0.8, position: [0, 2, -7], rotation: [0, 0, 0], scale: [14, 2, 1] },
+      { color: '#ffffff', intensity: 2.4, position: [0, 1.4, 7], rotation: [0, Math.PI, 0], scale: [16, 0.5, 1] },
+      { color: '#ffffff', intensity: 1.2, position: [0, 3.5, 7], rotation: [0, Math.PI, 0], scale: [16, 1.5, 1] },
+      { color: '#ffffff', intensity: 1.2, position: [0, 3.5, -7], rotation: [0, 0, 0], scale: [16, 1.5, 1] },
+    ],
+  },
+  day: {
+    label: 'Daylight',
+    bg: '#dde3ea',
+    floor: '#c9ced6',
+    ambient: 0.6,
+    envIntensity: 1.2,
+    key: '#fff7ea',
+    forms: [
+      { color: '#ffffff', intensity: 3, position: [0, 7, 0], rotation: [Math.PI / 2, 0, 0], scale: [16, 16, 1] },
+      { color: '#e6f0ff', intensity: 1.2, position: [-8, 2, 0], rotation: [0, Math.PI / 2, 0], scale: [16, 4, 1] },
+      { color: '#e6f0ff', intensity: 1.2, position: [8, 2, 0], rotation: [0, -Math.PI / 2, 0], scale: [16, 4, 1] },
+      { color: '#ffffff', intensity: 1, position: [0, 2, 8], rotation: [0, Math.PI, 0], scale: [16, 4, 1] },
+    ],
+  },
+  sunset: {
+    label: 'Sunset',
+    bg: '#2a1712',
+    floor: '#241612',
+    ambient: 0.3,
+    envIntensity: 1,
+    key: '#ffb070',
+    forms: [
+      { color: '#ff8a3d', intensity: 3, position: [-7, 1.5, 3], rotation: [0, Math.PI / 2.5, 0], scale: [14, 3, 1] },
+      { color: '#ff5e7a', intensity: 1, position: [0, 6, 0], rotation: [Math.PI / 2, 0, 0], scale: [12, 6, 1] },
+      { color: '#6a7bff', intensity: 0.6, position: [7, 2, -2], rotation: [0, -Math.PI / 2, 0], scale: [10, 2, 1] },
+      { color: '#ffb36b', intensity: 1.6, position: [0, 1.3, 7], rotation: [0, Math.PI, 0], scale: [16, 0.6, 1] },
+      { color: '#ff9b6b', intensity: 0.8, position: [0, 1.3, -7], rotation: [0, 0, 0], scale: [16, 0.6, 1] },
+    ],
+  },
+  night: {
+    label: 'Night',
+    bg: '#04050a',
+    floor: '#0a0c12',
+    ambient: 0.18,
+    envIntensity: 0.7,
+    key: '#8fb2ff',
+    forms: [
+      { color: '#4f7cff', intensity: 1.2, position: [-6, 2, 0], rotation: [0, Math.PI / 2, 0], scale: [10, 0.4, 1] },
+      { color: '#ff3d7f', intensity: 0.8, position: [6, 2, 0], rotation: [0, -Math.PI / 2, 0], scale: [10, 0.4, 1] },
+      { color: '#ffffff', intensity: 0.4, position: [0, 6, 0], rotation: [Math.PI / 2, 0, 0], scale: [6, 1, 1] },
+      { color: '#7aa2ff', intensity: 0.9, position: [0, 1.2, 7], rotation: [0, Math.PI, 0], scale: [16, 0.25, 1] },
+      { color: '#ff5fa0', intensity: 0.6, position: [0, 1.2, -7], rotation: [0, 0, 0], scale: [16, 0.25, 1] },
+    ],
+  },
+};

@@ -3,12 +3,15 @@
  * Includes: Hero section, Featured cars, Promotions, Testimonials, Newsletter
  */
 
-import React, { useState } from 'react';
+import React, { Suspense, lazy, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FaChevronRight, FaArrowRight } from 'react-icons/fa';
 import CarCard from '../components/CarCard';
 import TestimonialsSlider from '../components/TestimonialsSlider';
 import { carsData, testimonials, promotions } from '../data/mockData';
+
+const HeroCar3D = lazy(() => import('../components/three/HeroCar3D'));
+const heroCar = carsData.find(c => c.bodyType === 'roadster') || carsData[0];
 
 const Home = () => {
   const featuredCars = carsData.slice(0, 3);
@@ -27,20 +30,43 @@ const Home = () => {
   return (
     <div className="w-full">
       {/* Hero Section  */}
-      <section className="bg-white">
-        <div className="max-w-6xl mx-auto px-6 py-24 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-          <div>
-            <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-4">ZimCar — Modern car buying, simplified</h1>
-            <p className="text-gray-600 mb-8">Browse curated vehicles, transparent pricing, and fast support. Trusted in Zimbabwe.</p>
-            <div className="flex gap-3">
-              <Link to="/inventory" className="inline-block bg-black text-white px-4 py-2 rounded font-medium">Browse Inventory</Link>
-              <Link to="/contact" className="inline-block border border-gray-200 text-gray-800 px-4 py-2 rounded">Contact Sales</Link>
-            </div>
+      <section className="relative overflow-hidden bg-[#0c0e12] text-white">
+        <div className="absolute inset-0 md:left-[30%]">
+          <Suspense fallback={null}>
+            <HeroCar3D car={heroCar} />
+          </Suspense>
+        </div>
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#0c0e12] via-[#0c0e12]/70 to-transparent md:via-[#0c0e12]/40" />
+        <div className="pointer-events-none relative max-w-7xl mx-auto px-6 pt-16 pb-[52vh] md:py-36">
+          <span className="inline-block rounded-full border border-amber-500/40 bg-amber-500/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-amber-400">
+            Zimbabwe&apos;s first 3D car showroom
+          </span>
+          <h1 className="mt-5 max-w-xl text-4xl md:text-6xl font-extrabold leading-tight">
+            See every car <span className="text-amber-400">inside &amp; out</span> before you visit.
+          </h1>
+          <p className="mt-5 max-w-lg text-white/70">
+            Walk our virtual showroom, open the doors, sit in the driver&apos;s seat and build your spec in real time. Transparent pricing, fast support.
+          </p>
+          <div className="pointer-events-auto mt-8 flex flex-wrap gap-3">
+            <Link to="/showroom" className="inline-flex items-center gap-2 rounded-lg bg-amber-500 px-5 py-3 font-semibold text-black hover:bg-amber-400">
+              Enter 3D Showroom <FaArrowRight />
+            </Link>
+            <Link to="/inventory" className="inline-flex items-center gap-2 rounded-lg border border-white/20 px-5 py-3 font-medium text-white hover:bg-white/10">
+              Browse Inventory
+            </Link>
           </div>
-          <div className="flex items-center justify-center">
-            <img src="https://images.unsplash.com/photo-1502877338535-766e1452684a?w=900&h=600&fit=crop" alt="Car" className="w-full rounded shadow" onError={e => { e.target.src = 'https://images.unsplash.com/photo-1503736334956-4c8f8e92946d?w=600&h=400&fit=crop'; }} />
+          <div className="mt-10 flex flex-wrap gap-6 text-sm text-white/60">
+            <div><span className="block text-2xl font-bold text-white">{carsData.length}</span>cars in 3D</div>
+            <div><span className="block text-2xl font-bold text-white">360°</span>interiors</div>
+            <div><span className="block text-2xl font-bold text-white">Live</span>configurator</div>
           </div>
         </div>
+        <Link
+          to={`/car/${heroCar.id}`}
+          className="absolute bottom-5 right-5 rounded-full border border-white/15 bg-black/50 px-4 py-2 text-xs text-white/80 backdrop-blur hover:bg-white/10"
+        >
+          {heroCar.year} {heroCar.make} {heroCar.model} · ${heroCar.price.toLocaleString()} — drag to spin
+        </Link>
       </section>
 
       {/* Featured Cars Section */}

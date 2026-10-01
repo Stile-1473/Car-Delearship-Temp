@@ -12,6 +12,7 @@ import CarDetails from './pages/CarDetails';
 import About from './pages/About';
 import Blog from './pages/Blog';
 import Contact from './pages/Contact';
+import Showroom from './pages/Showroom';
 import './App.css';
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/inventory" element={<Inventory />} />
+            <Route path="/showroom" element={<Showroom />} />
             <Route path="/car/:id" element={<CarDetails />} />
             <Route path="/about" element={<About />} />
             <Route path="/blog" element={<Blog />} />

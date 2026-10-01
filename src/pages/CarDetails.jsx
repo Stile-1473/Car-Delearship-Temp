@@ -1,22 +1,50 @@
 /**
  * Car Details Page
  * Displays detailed information about a specific car
- * Includes: Image gallery, specs, financing info, and inquiry form
+ * Includes: Interactive 3D viewer/configurator, specs, gallery, and inquiry form
  */
 
-import React from 'react';
+import React, { Suspense, lazy, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { FaChevronLeft, FaChevronRight, FaShare, FaFacebook, FaTwitter, FaWhatsapp } from 'react-icons/fa';
 import ContactForm from '../components/ContactForm';
 import { carsData } from '../data/mockData';
+
+// three.js is heavy, so it is only downloaded when a car page is opened
+const CarViewer = lazy(() => import('../components/three/CarViewer'));
+
+const ViewerFallback = () => (
+  <div className="flex h-[78vh] min-h-[560px] items-center justify-center rounded-2xl bg-black text-white/70">
+    <div className="h-10 w-10 animate-spin rounded-full border-2 border-white/20 border-t-amber-500" />
+  </div>
+);
 
 const CarDetails = () => {
   const { id } = useParams();
   const car = carsData.find(c => String(c.id) === String(id));
+  const [build, setBuild] = useState(null);
   if (!car) return <div className="text-center text-gray-600 py-20 text-lg">Car not found.</div>;
+
+  const handleEnquire = (b) => {
+    setBuild(b);
+    requestAnimationFrame(() => document.getElementById('enquire')?.scrollIntoView({ behavior: 'smooth' }));
+  };
+
+  const buildMessage = build
+    ? `Hi ZimCar, I'm interested in the ${build.title} configured as:\n` +
+      `• Paint: ${build.paint} (${build.finish})\n• Wheels: ${build.rims}\n• Interior: ${build.interior}\n` +
+      `Build price shown: $${build.total.toLocaleString()}.\nPlease contact me about availability and finance.`
+    : '';
 
   return (
     <main className="min-h-screen bg-white pb-16">
+      <section id="viewer" className="bg-neutral-950 px-2 pt-2 sm:px-4 sm:pt-4">
+        <div className="mx-auto max-w-7xl">
+          <Suspense fallback={<ViewerFallback />}>
+            <CarViewer car={car} onEnquire={handleEnquire} />
+          </Suspense>
+        </div>
+      </section>
+
       <section className="py-12">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-8 flex flex-col md:flex-row gap-8 items-start">
@@ -37,7 +65,7 @@ const CarDetails = () => {
               </div>
 
               <a
-                href="/contact"
+                href="#enquire"
                 className="inline-block bg-black text-white px-6 py-2 rounded-md font-medium hover:opacity-95"
               >
                 Enquire Now
@@ -75,8 +103,13 @@ const CarDetails = () => {
         </div>
 
         {/* Contact Form */}
-        <div className="max-w-2xl mx-auto mt-8 px-4">
-          <ContactForm title={`Inquire About This ${car.year} ${car.make} ${car.model}`} />
+        <div id="enquire" className="max-w-2xl mx-auto mt-8 px-4 scroll-mt-20">
+          <ContactForm
+            key={buildMessage}
+            title={`Inquire About This ${car.year} ${car.make} ${car.model}`}
+            initialSubject={build ? `3D build: ${build.title}` : ''}
+            initialMessage={buildMessage}
+          />
         </div>
       </section>
     </main>
